@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>落地頁管理後台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-brand"><span>Y</span><div><strong>頁面管理</strong><small>Landing CMS</small></div></div>
+      <nav>
+        <a href="#tracking">連結與像素</a>
+        <a href="#persona">人設資料</a>
+        <a href="#copy">頁面文案</a>
+        <a href="#images">圖片管理</a>
+      </nav>
+      <a class="preview-link" href="./index.html" target="_blank">預覽前台 ↗</a>
+      <button class="logout" id="logoutButton" type="button">登出</button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div><p>CONTENT MANAGEMENT</p><h1>落地頁管理後台</h1></div>
+        <div class="save-group"><span id="saveStatus">尚未儲存</span><button class="primary" id="saveButton" type="button">儲存並發布</button></div>
+      </header>
+
+      <div class="setup-warning" id="setupWarning" hidden>
+        <strong>後台尚未連接 Supabase</strong>
+        <p>请先按照项目中的 <code>supabase/setup.sql</code> 建立数据库，再把项目 URL 和 anon key 填入 <code>config.js</code>。</p>
+      </div>
+
+      <form id="contentForm">
+        <section class="panel" id="tracking">
+          <div class="panel-title"><span>01</span><div><h2>連結與廣告像素</h2><p>所有前台 LINE 按鈕和廣告追蹤由這裡統一控制。</p></div></div>
+          <div class="form-grid">
+            <label class="wide">LINE 加好友連結<input type="url" data-field="tracking.lineUrl" placeholder="https://line.me/R/ti/p/..." required></label>
+            <label>Meta Pixel ID<input type="text" data-field="tracking.metaPixelId" placeholder="例如：1234567890"></label>
+            <label>TikTok Pixel ID<input type="text" data-field="tracking.tiktokPixelId" placeholder="例如：CXXXXXXXXX"></label>
+          </div>
+        </section>
+
+        <section class="panel" id="persona">
+          <div class="panel-title"><span>02</span><div><h2>人設資料</h2><p>切换人物时，从这里修改姓名、年龄、所在地和基础资料。</p></div></div>
+          <div class="form-grid">
+            <label>人物姓名<input type="text" data-field="persona.name"></label>
+            <label>年龄<input type="text" data-field="persona.age"></label>
+            <label>所在地<input type="text" data-field="persona.location"></label>
+            <label>生日／星座<input type="text" data-field="persona.birth"></label>
+            <label>身高<input type="text" data-field="persona.height"></label>
+            <label>感情状态<input type="text" data-field="persona.status"></label>
+            <label class="wide">人物标签（用英文逗号分隔）<input type="text" data-field="persona.traits"></label>
+            <label>博客名称<input type="text" data-field="brand.name"></label>
+            <label>博客副标题<input type="text" data-field="brand.tagline"></label>
+          </div>
+        </section>
+
+        <section class="panel" id="copy">
+          <div class="panel-title"><span>03</span><div><h2>頁面文案</h2><p>修改后保存，前台刷新即可看到新内容。</p></div></div>
+          <div class="subheading">首屏</div>
+          <div class="form-grid">
+            <label>文章分类<input type="text" data-field="hero.category"></label>
+            <label>显示日期<input type="text" data-field="hero.date"></label>
+            <label class="wide">主标题<textarea data-field="hero.title" rows="3"></textarea></label>
+            <label class="wide">简介<textarea data-field="hero.intro" rows="2"></textarea></label>
+            <label class="wide">补充说明<input type="text" data-field="hero.note"></label>
+          </div>
+          <div class="subheading">关于我</div>
+          <div class="form-grid">
+            <label>区块标题<input type="text" data-field="about.title"></label>
+            <label>区块副标题<input type="text" data-field="about.subtitle"></label>
+            <label class="wide">资料卡标题<input type="text" data-field="about.cardTitle"></label>
+            <label class="wide">资料卡正文<textarea data-field="about.body" rows="3"></textarea></label>
+          </div>
+          <div class="subheading">人物故事</div>
+          <div class="form-grid">
+            <label class="wide">侧边引言<input type="text" data-field="story.quote"></label>
+            <label class="wide">开场句<input type="text" data-field="story.lead"></label>
+            <label class="wide">故事第一段<textarea data-field="story.p1" rows="3"></textarea></label>
+            <label class="wide">故事第二段<textarea data-field="story.p2" rows="3"></textarea></label>
+            <label class="wide">重点引言<textarea data-field="story.highlight" rows="2"></textarea></label>
+            <label class="wide">故事结尾<textarea data-field="story.p3" rows="3"></textarea></label>
+          </div>
+          <div class="subheading">转化文案</div>
+          <div class="form-grid">
+            <label class="wide">互动问题<input type="text" data-field="conversation.question"></label>
+            <label class="wide">互动说明<textarea data-field="conversation.answer" rows="2"></textarea></label>
+            <label class="wide">最终标题<textarea data-field="cta.title" rows="2"></textarea></label>
+            <label class="wide">最终说明<textarea data-field="cta.body" rows="2"></textarea></label>
+            <label class="wide">LINE 按钮文字<input type="text" data-field="cta.button"></label>
+          </div>
+        </section>
+
+        <section class="panel" id="images">
+          <div class="panel-title"><span>04</span><div><h2>圖片管理</h2><p>建议上传 JPG 或 WebP，每张图片不超过 3MB。</p></div></div>
+          <div class="image-grid">
+            <div class="image-field" data-image-key="images.avatar"><img alt="头像预览"><strong>页头头像</strong><input type="file" accept="image/*"><button type="button">更换图片</button></div>
+            <div class="image-field" data-image-key="images.hero"><img alt="首图预览"><strong>首屏主图</strong><input type="file" accept="image/*"><button type="button">更换图片</button></div>
+            <div class="image-field" data-image-key="images.life1"><img alt="生活照一预览"><strong>生活照 1</strong><input type="file" accept="image/*"><button type="button">更换图片</button></div>
+            <div class="image-field" data-image-key="images.life2"><img alt="生活照二预览"><strong>生活照 2</strong><input type="file" accept="image/*"><button type="button">更换图片</button></div>
+            <div class="image-field" data-image-key="images.life3"><img alt="生活照三预览"><strong>生活照 3</strong><input type="file" accept="image/*"><button type="button">更换图片</button></div>
+          </div>
+        </section>
+      </form>
+    </main>
+  </div>
+
+  <div class="login-layer" id="loginLayer">
+    <form class="login-card" id="loginForm">
+      <div class="login-logo">Y</div>
+      <p>LANDING CMS</p>
+      <h2>登入管理後台</h2>
+      <label>管理员邮箱<input type="email" id="email" autocomplete="username" required></label>
+      <label>密码<input type="password" id="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">登入</button>
+      <span class="login-message" id="loginMessage"></span>
+    </form>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="./config.js"></script>
+  <script src="./content-default.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>
