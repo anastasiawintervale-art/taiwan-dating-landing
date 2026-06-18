@@ -48,10 +48,10 @@ window.DEFAULT_SITE_CONTENT = {
     tiktokPixelId: ""
   },
   images: {
-    avatar: "./assets/lifestyle-dinner.jpg",
-    hero: "./assets/hero-portrait.jpg",
-    life1: "./assets/lifestyle-coffee.jpg",
-    life2: "./assets/lifestyle-outdoor.jpg",
-    life3: "./assets/lifestyle-dinner.jpg"
+    avatar: "./lifestyle-dinner.jpg",
+    hero: "./hero-portrait.jpg",
+    life1: "./lifestyle-coffee.jpg",
+    life2: "./lifestyle-outdoor.jpg",
+    life3: "./lifestyle-dinner.jpg"
   }
 };
