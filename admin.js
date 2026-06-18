@@ -1,5 +1,6 @@
 (function () {
   const config = window.CMS_CONFIG || {};
+  const ADMIN_EMAIL = "admin@taiwan-dating.local";
   const defaults = structuredClone(window.DEFAULT_SITE_CONTENT || {});
   const configured = Boolean(config.supabaseUrl && config.supabaseAnonKey);
   const loginLayer = document.getElementById("loginLayer");
@@ -49,11 +50,11 @@
     });
   }
 
-  async function signIn(email, password) {
+  async function signIn(password) {
     const response = await fetch(`${config.supabaseUrl}/auth/v1/token?grant_type=password`, {
       method: "POST",
       headers: { ...headers(), "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email: ADMIN_EMAIL, password })
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error_description || data.msg || "登入失败");
@@ -111,7 +112,7 @@
     if (!configured) return;
     loginMessage.textContent = "登入中…";
     try {
-      await signIn(document.getElementById("email").value, document.getElementById("password").value);
+      await signIn(document.getElementById("password").value);
       await loadContent();
       loginLayer.classList.add("hidden");
     } catch (error) { loginMessage.textContent = error.message; }
