@@ -35,11 +35,24 @@
     });
     document.querySelectorAll("[data-cms-img]").forEach((image) => {
       const value = get(content, image.dataset.cmsImg);
-      if (!value || image.src === value) return;
+      if (!value) {
+        image.classList.add("is-ready");
+        return;
+      }
+
       const preload = new Image();
       preload.decoding = "async";
-      preload.onload = () => { image.src = value; };
+      let settled = false;
+      const reveal = (src) => {
+        if (settled) return;
+        settled = true;
+        if (src) image.src = src;
+        image.classList.add("is-ready");
+      };
+      preload.onload = () => reveal(value);
+      preload.onerror = () => reveal();
       preload.src = value;
+      window.setTimeout(() => reveal(), 8000);
     });
     const traits = String(content.persona?.traits || "").split(",").map((item) => item.trim()).filter(Boolean);
     const traitsBox = document.querySelector("[data-cms-traits]");
