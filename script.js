@@ -1,3 +1,10 @@
+if (window.location.hash === "#line") {
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  window.scrollTo(0, 0);
+  window.addEventListener("load", () => window.scrollTo(0, 0), { once: true });
+}
+
 document.querySelectorAll("[data-line-link]").forEach((link) => {
   link.addEventListener("click", () => {
     if (typeof window.fbq === "function") {
@@ -10,7 +17,7 @@ document.querySelectorAll("[data-line-link]").forEach((link) => {
 const menuButton = document.querySelector(".menu-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
 const mobileLine = document.querySelector(".mobile-line");
-const lineRevealPoint = document.querySelector("#about");
+const lineRevealPoint = document.querySelector("#story");
 
 menuButton.addEventListener("click", () => {
   const isOpen = document.body.classList.toggle("menu-open");
