@@ -94,13 +94,16 @@
   }
 
   async function uploadImage(file, key, preview) {
+    if (file.size > 12 * 1024 * 1024) return notify("原始圖片請控制在 12MB 以內");
+    notify("圖片壓縮中…");
+    file = await optimizeImage(file);
     if (file.size > 3 * 1024 * 1024) return notify("图片请控制在 3MB 以内");
     const extension = file.name.split(".").pop().replace(/[^a-zA-Z0-9]/g, "") || "jpg";
     const path = `${key.replace("images.", "")}-${Date.now()}.${extension}`;
     notify("图片上传中…");
     const response = await fetch(`${config.supabaseUrl}/storage/v1/object/site-assets/${path}`, {
       method: "POST",
-      headers: { ...headers(session.access_token), "Content-Type": file.type, "x-upsert": "true" },
+      headers: { ...headers(session.access_token), "Content-Type": file.type, "cache-control": "31536000", "x-upsert": "true" },
       body: file
     });
     if (!response.ok) return notify("上传失败，请检查 Storage 设置");
@@ -109,6 +112,25 @@
     preview.src = url;
     saveStatus.textContent = "图片已上传，记得储存发布";
     notify("图片上传成功");
+  }
+
+  async function optimizeImage(file) {
+    try {
+      const bitmap = await createImageBitmap(file);
+      const maxDimension = 1600;
+      const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+      canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+      canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      bitmap.close();
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/webp", .82));
+      if (!blob) throw new Error("IMAGE_OPTIMIZE_FAILED");
+      return new File([blob], "optimized.webp", { type: "image/webp" });
+    } catch (error) {
+      console.warn("圖片壓縮失敗，使用原始檔案。", error);
+      return file;
+    }
   }
 
   loginForm.addEventListener("submit", async (event) => {
