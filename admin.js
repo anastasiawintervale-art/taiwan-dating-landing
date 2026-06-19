@@ -117,14 +117,18 @@
   async function optimizeImage(file) {
     try {
       const bitmap = await createImageBitmap(file);
-      const maxDimension = 1600;
+      const maxDimension = 2400;
+      if (Math.max(bitmap.width, bitmap.height) <= maxDimension && file.size <= 3 * 1024 * 1024) {
+        bitmap.close();
+        return file;
+      }
       const scale = Math.min(1, maxDimension / Math.max(bitmap.width, bitmap.height));
       const canvas = document.createElement("canvas");
       canvas.width = Math.max(1, Math.round(bitmap.width * scale));
       canvas.height = Math.max(1, Math.round(bitmap.height * scale));
       canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
       bitmap.close();
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/webp", .82));
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/webp", .92));
       if (!blob) throw new Error("IMAGE_OPTIMIZE_FAILED");
       return new File([blob], "optimized.webp", { type: "image/webp" });
     } catch (error) {
