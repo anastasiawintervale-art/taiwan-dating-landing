@@ -35,7 +35,11 @@
     });
     document.querySelectorAll("[data-cms-img]").forEach((image) => {
       const value = get(content, image.dataset.cmsImg);
-      if (value) image.src = value;
+      if (!value || image.src === value) return;
+      const preload = new Image();
+      preload.decoding = "async";
+      preload.onload = () => { image.src = value; };
+      preload.src = value;
     });
     const traits = String(content.persona?.traits || "").split(",").map((item) => item.trim()).filter(Boolean);
     const traitsBox = document.querySelector("[data-cms-traits]");
