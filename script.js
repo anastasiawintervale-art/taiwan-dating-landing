@@ -10,7 +10,7 @@ document.querySelectorAll("[data-line-link]").forEach((link) => {
 const menuButton = document.querySelector(".menu-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
 const mobileLine = document.querySelector(".mobile-line");
-const lineRevealPoint = document.querySelector(".conversation");
+const lineRevealPoint = document.querySelector("#about");
 
 menuButton.addEventListener("click", () => {
   const isOpen = document.body.classList.toggle("menu-open");
