@@ -40,7 +40,10 @@
     const traits = String(content.persona?.traits || "").split(",").map((item) => item.trim()).filter(Boolean);
     const traitsBox = document.querySelector("[data-cms-traits]");
     if (traitsBox && traits.length) traitsBox.innerHTML = traits.map((trait) => `<span>${escapeHtml(trait)}</span>`).join("");
-    document.querySelectorAll("[data-line-link]").forEach((link) => { link.href = content.tracking.lineUrl; });
+    const primaryLineUrl = content.tracking?.lineUrlPrimary || content.tracking?.lineUrl;
+    const secondaryLineUrl = content.tracking?.lineUrlSecondary || primaryLineUrl;
+    document.querySelectorAll('[data-line-target="primary"]').forEach((link) => { if (primaryLineUrl) link.href = primaryLineUrl; });
+    document.querySelectorAll('[data-line-target="secondary"]').forEach((link) => { if (secondaryLineUrl) link.href = secondaryLineUrl; });
     loadPixels(content.tracking || {});
     document.dispatchEvent(new CustomEvent("cms:ready", { detail: content }));
   }
