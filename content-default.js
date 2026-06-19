@@ -44,6 +44,8 @@ window.DEFAULT_SITE_CONTENT = {
   },
   tracking: {
     lineUrl: "https://line.me/R/ti/p/YOUR_LINE_ID_HERE",
+    lineUrlPrimary: "https://line.me/R/ti/p/YOUR_LINE_ID_HERE",
+    lineUrlSecondary: "https://line.me/R/ti/p/YOUR_SECOND_LINE_ID_HERE",
     metaPixelId: "",
     tiktokPixelId: ""
   },
