@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=3">
 </head>
 <body>
   <header class="site-header">
@@ -30,7 +30,7 @@
         <a href="#about">關於我</a>
         <a href="#story">我的故事</a>
         <a href="#life">生活日常</a>
-        <a href="#line" class="nav-line" data-line-link>LINE 聊聊</a>
+        <a href="#line" class="nav-line">看完再聊聊</a>
       </nav>
     </div>
   </header>
@@ -44,7 +44,7 @@
           <p class="hero-intro" data-cms="hero.intro">42 歲，住在台北。如果妳也期待一段真誠的認識，很高興妳來到這裡。</p>
           <div class="hero-actions">
             <a class="button button-dark" href="#about">先認識我</a>
-            <a class="button button-line" href="#line">用 LINE 打聲招呼</a>
+            <a class="button button-line" href="#story">繼續看我的故事</a>
           </div>
           <p class="read-note" data-cms="hero.note">一篇關於生活、陪伴，以及期待的自我介紹</p>
         </article>
@@ -137,7 +137,7 @@
         <p class="eyebrow">Nice to meet you</p>
         <h2 data-cms="cta.title">如果妳覺得我們可能聊得來，歡迎來打聲招呼。</h2>
         <p data-cms="cta.body">加完後傳一個貼圖給我就好。沒有制式開場，也不用有壓力，讓我們先從一句嗨開始。</p>
-        <a class="button button-line button-large" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link>
+        <a class="button button-line button-large" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link data-line-target="primary">
           <span data-cms="cta.button">傳個貼圖給元軒</span> <span>↗</span>
         </a>
         <small>私人 LINE・真誠交友・不打擾</small>
@@ -151,13 +151,13 @@
     <span>© <span id="year"></span> YUAN-HSUAN</span>
   </footer>
 
-  <a class="mobile-line" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link>
+  <a class="mobile-line" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link data-line-target="secondary" aria-hidden="true" tabindex="-1">
     <span>LINE</span> 傳個貼圖，讓我認識妳
   </a>
 
   <script src="./config.js?v=2"></script>
-  <script src="./content-default.js"></script>
-  <script src="./cms.js"></script>
-  <script src="./script.js"></script>
+  <script src="./content-default.js?v=3"></script>
+  <script src="./cms.js?v=3"></script>
+  <script src="./script.js?v=3"></script>
 </body>
 </html>
