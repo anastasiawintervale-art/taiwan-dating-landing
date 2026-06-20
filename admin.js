@@ -68,8 +68,7 @@
     const rows = await response.json();
     content = rows[0]?.content ? { ...defaults, ...rows[0].content } : defaults;
     content.tracking ||= {};
-    content.tracking.lineUrlPrimary ||= content.tracking.lineUrl || defaults.tracking.lineUrlPrimary;
-    content.tracking.lineUrlSecondary ||= content.tracking.lineUrl || defaults.tracking.lineUrlSecondary || content.tracking.lineUrlPrimary;
+    content.tracking.lineUrl ||= content.tracking.lineUrlPrimary || content.tracking.lineUrlSecondary || defaults.tracking.lineUrl;
     bindForm();
   }
 
@@ -77,7 +76,8 @@
     saveButton.disabled = true;
     saveStatus.textContent = "正在儲存…";
     try {
-      content.tracking.lineUrl = content.tracking.lineUrlPrimary;
+      delete content.tracking.lineUrlPrimary;
+      delete content.tracking.lineUrlSecondary;
       const response = await fetch(`${config.supabaseUrl}/rest/v1/site_content`, {
         method: "POST",
         headers: { ...headers(session.access_token), "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal" },
