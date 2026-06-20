@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./admin.css">
+  <link rel="stylesheet" href="./admin.css?v=2">
+  <link rel="stylesheet" href="./admin-personas.css?v=1">
 </head>
 <body>
   <div class="admin-shell">
@@ -29,6 +30,18 @@
         <div><p>CONTENT MANAGEMENT</p><h1>落地頁管理後台</h1></div>
         <div class="save-group"><span id="saveStatus">尚未儲存</span><button class="primary" id="saveButton" type="button">儲存並發布</button></div>
       </header>
+
+      <section class="persona-manager" aria-label="人設管理">
+        <div class="persona-current">
+          <label for="personaSelect">目前人設</label>
+          <select id="personaSelect" aria-label="目前人設"></select>
+          <a id="personaPublicUrl" href="./index.html?p=yuanxuan" target="_blank" rel="noopener">?p=yuanxuan ↗</a>
+        </div>
+        <div class="persona-actions">
+          <button class="secondary" id="newPersonaButton" type="button">＋ 新建人設</button>
+          <button class="secondary" id="duplicatePersonaButton" type="button">複製目前人設</button>
+        </div>
+      </section>
 
       <div class="setup-warning" id="setupWarning" hidden>
         <strong>後台尚未連接 Supabase</strong>
@@ -110,6 +123,18 @@
     </main>
   </div>
 
+  <div class="persona-dialog-layer hidden" id="personaDialogLayer">
+    <form class="persona-dialog" id="personaDialogForm">
+      <p>PERSONA MANAGEMENT</p>
+      <h2 id="personaDialogTitle">新建人設</h2>
+      <label>人物姓名<input type="text" id="newPersonaName" required placeholder="例如：林浩"></label>
+      <label>人物代號<input type="text" id="newPersonaCode" required maxlength="40" pattern="[a-z][a-z0-9-]{1,39}" placeholder="例如：linhao" autocomplete="off"></label>
+      <small>代號只可使用小寫拼音字母、數字和連字符，不可輸入中文；建立後會成為網址的一部分。</small>
+      <span class="dialog-message" id="personaDialogMessage"></span>
+      <div class="dialog-actions"><button class="secondary" id="cancelPersonaButton" type="button">取消</button><button class="primary" type="submit">建立人設</button></div>
+    </form>
+  </div>
+
   <div class="login-layer" id="loginLayer">
     <form class="login-card" id="loginForm">
       <div class="login-logo">Y</div>
@@ -124,6 +149,6 @@
   <div class="toast" id="toast"></div>
   <script src="./config.js?v=2"></script>
   <script src="./content-default.js?v=4"></script>
-  <script src="./admin.js?v=6"></script>
+  <script src="./admin.js?v=7"></script>
 </body>
 </html>
