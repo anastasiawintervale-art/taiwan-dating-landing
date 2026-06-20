@@ -42,7 +42,8 @@
 
   function applyContent(content) {
     document.documentElement.dataset.persona = personaCode;
-    if (content.brand?.name || content.persona?.name) document.title = content.brand?.name || content.persona.name;
+    const titleName = content.brand?.name || content.persona?.name;
+    if (titleName) document.title = content.brand?.tagline ? `${titleName}｜${content.brand.tagline}` : titleName;
     document.querySelectorAll("[data-cms]").forEach((element) => {
       const value = get(content, element.dataset.cms);
       if (value !== undefined && value !== null) element.textContent = value;
