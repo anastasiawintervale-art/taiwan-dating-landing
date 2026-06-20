@@ -8,8 +8,8 @@ if (window.location.hash === "#line") {
 document.querySelectorAll("[data-line-link]").forEach((link) => {
   link.addEventListener("click", () => {
     if (typeof window.fbq === "function") {
-      window.fbq("trackCustom", "LineClick", { line_target: "footer" });
-      window.fbq("track", "Lead", { content_name: "LINE click - footer" });
+      window.fbq("trackCustom", "LineClick", { line_target: "footer", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+      window.fbq("track", "Lead", { content_name: "LINE click - footer", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
     }
   });
 });
@@ -23,7 +23,7 @@ const lineSection = document.querySelector("#line");
 mobileLine?.addEventListener("click", () => {
   lineSection?.scrollIntoView({ behavior: "smooth", block: "start" });
   if (typeof window.fbq === "function") {
-    window.fbq("trackCustom", "LineSectionView", { source: "mobile_sticky" });
+    window.fbq("trackCustom", "LineSectionView", { source: "mobile_sticky", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
   }
 });
 
