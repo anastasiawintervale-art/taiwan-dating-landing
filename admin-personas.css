@@ -1,0 +1,27 @@
+button,input,textarea,select { font: inherit; }
+.persona-manager { max-width: 1040px; margin: 28px auto 0; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #d6ded8; border-radius: 12px; background: #eaf0ec; }
+.persona-current { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.persona-current label { color: #516058; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.persona-current select { min-width: 220px; padding: 10px 36px 10px 12px; border: 1px solid #cad5ce; border-radius: 6px; background: #fff; color: var(--ink); font-weight: 700; }
+.persona-current a { color: var(--green); font-size: 11px; text-decoration: none; white-space: nowrap; }
+.persona-actions { display: flex; gap: 8px; }
+.secondary { min-height: 40px; padding: 8px 14px; border: 1px solid #cbd5cf; border-radius: 6px; background: #fff; color: #405048; font-weight: 600; cursor: pointer; }
+.persona-dialog-layer { position: fixed; z-index: 90; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(10,25,18,.72); backdrop-filter: blur(8px); }
+.persona-dialog-layer.hidden { display: none; }
+.persona-dialog { width: min(440px, 100%); padding: 34px; border-radius: 14px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.25); }
+.persona-dialog > p { margin: 0; color: #9a8260; font-size: 9px; letter-spacing: .18em; }
+.persona-dialog h2 { margin: 7px 0 24px; }
+.persona-dialog label { display: grid; gap: 7px; margin-top: 15px; color: #54615a; font-size: 12px; font-weight: 600; }
+.persona-dialog small { display: block; margin-top: 10px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.dialog-message { display: block; min-height: 18px; margin-top: 8px; color: #b54343; font-size: 11px; }
+.dialog-actions { margin-top: 15px; display: flex; justify-content: flex-end; gap: 9px; }
+@media (max-width: 850px) {
+  .persona-manager { align-items: stretch; flex-direction: column; }
+  .persona-current { align-items: stretch; flex-direction: column; }
+  .persona-current select { width: 100%; min-width: 0; }
+  .persona-actions { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .persona-actions { grid-template-columns: 1fr; }
+  .persona-actions .secondary { width: 100%; }
+}
