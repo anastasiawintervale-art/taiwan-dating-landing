@@ -1,6 +1,10 @@
 (function () {
   const config = window.CMS_CONFIG || {};
   const defaults = window.DEFAULT_SITE_CONTENT || {};
+  const requestedCode = new URLSearchParams(window.location.search).get("p") || "yuanxuan";
+  const personaCode = /^[a-z][a-z0-9-]{1,39}$/.test(requestedCode) ? requestedCode : "yuanxuan";
+  const contentId = personaCode === "yuanxuan" ? "main" : personaCode;
+  window.ACTIVE_PERSONA_CODE = personaCode;
 
   const get = (object, path) => path.split(".").reduce((value, key) => value?.[key], object);
   const merge = (base, extra) => {
@@ -16,12 +20,20 @@
   async function loadRemoteContent() {
     if (!config.supabaseUrl || !config.supabaseAnonKey) return defaults;
     try {
-      const response = await fetch(`${config.supabaseUrl}/rest/v1/site_content?id=eq.main&select=content`, {
+      const response = await fetch(`${config.supabaseUrl}/rest/v1/site_content?id=eq.${encodeURIComponent(contentId)}&select=content`, {
         headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}` }
       });
       if (!response.ok) throw new Error("CMS request failed");
       const rows = await response.json();
-      return merge(defaults, rows[0]?.content || {});
+      if (rows[0]?.content) return merge(defaults, rows[0].content);
+      if (contentId !== "main") {
+        const fallbackResponse = await fetch(`${config.supabaseUrl}/rest/v1/site_content?id=eq.main&select=content`, {
+          headers: { apikey: config.supabaseAnonKey, Authorization: `Bearer ${config.supabaseAnonKey}` }
+        });
+        const fallbackRows = fallbackResponse.ok ? await fallbackResponse.json() : [];
+        return merge(defaults, fallbackRows[0]?.content || {});
+      }
+      return defaults;
     } catch (error) {
       console.warn("CMS 暫時無法連線，已使用預設內容。", error);
       return defaults;
@@ -29,6 +41,8 @@
   }
 
   function applyContent(content) {
+    document.documentElement.dataset.persona = personaCode;
+    if (content.brand?.name || content.persona?.name) document.title = content.brand?.name || content.persona.name;
     document.querySelectorAll("[data-cms]").forEach((element) => {
       const value = get(content, element.dataset.cms);
       if (value !== undefined && value !== null) element.textContent = value;
