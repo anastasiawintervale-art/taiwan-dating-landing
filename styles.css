@@ -187,7 +187,7 @@ footer p { margin: 8px 0 18px; letter-spacing: 0; }
   .line-card > p:not(.eyebrow) { font-size: 14px; }
   .button-large { width: 100%; min-width: 0; }
   footer { padding-bottom: 120px; }
-  .mobile-line { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 7px; background: var(--line-green); box-shadow: 0 12px 32px rgba(0, 0, 0, .2); color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(calc(100% + 28px)); transition: opacity .25s, transform .25s, visibility .25s; }
+  .mobile-line { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 7px; background: var(--line-green); box-shadow: 0 12px 32px rgba(0, 0, 0, .2); color: #fff; font-family: inherit; font-size: 14px; font-weight: 700; text-decoration: none; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(calc(100% + 28px)); transition: opacity .25s, transform .25s, visibility .25s; }
   .mobile-line.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
   .menu-open .mobile-line { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(calc(100% + 28px)); }
   .mobile-line span { padding: 2px 6px; border: 1px solid rgba(255,255,255,.6); border-radius: 4px; font-size: 9px; }
