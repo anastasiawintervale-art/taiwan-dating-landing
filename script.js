@@ -8,8 +8,9 @@ if (window.location.hash === "#line") {
 document.querySelectorAll("[data-line-link]").forEach((link) => {
   link.addEventListener("click", () => {
     if (typeof window.fbq === "function") {
-      window.fbq("trackCustom", "LineClick", { line_target: "footer", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
-      window.fbq("track", "Lead", { content_name: "LINE click - footer", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+      const lineTarget = link.dataset.lineLocation || "footer";
+      window.fbq("trackCustom", "LineClick", { line_target: lineTarget, persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+      window.fbq("track", "Lead", { content_name: `LINE click - ${lineTarget}`, persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
     }
   });
 });
@@ -17,13 +18,13 @@ document.querySelectorAll("[data-line-link]").forEach((link) => {
 const menuButton = document.querySelector(".menu-toggle");
 const navLinks = document.querySelectorAll(".site-nav a");
 const mobileLine = document.querySelector(".mobile-line");
-const lineRevealPoint = document.querySelector("#story");
-const lineSection = document.querySelector("#line");
+const lineRevealPoint = document.querySelector("#about");
+const lineSection = document.querySelector("#line-quick") || document.querySelector("#line");
 
 mobileLine?.addEventListener("click", () => {
   lineSection?.scrollIntoView({ behavior: "smooth", block: "start" });
   if (typeof window.fbq === "function") {
-    window.fbq("trackCustom", "LineSectionView", { source: "mobile_sticky", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+    window.fbq("trackCustom", "LineSectionNavigate", { source: "mobile_sticky", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
   }
 });
 
@@ -43,7 +44,7 @@ navLinks.forEach((link) => {
 
 function updateMobileLineVisibility() {
   if (!mobileLine || !lineRevealPoint || !lineSection) return;
-  const passedRevealPoint = window.scrollY + window.innerHeight >= lineRevealPoint.offsetTop + 80;
+  const passedRevealPoint = window.scrollY + window.innerHeight >= lineRevealPoint.offsetTop + (lineRevealPoint.offsetHeight * .72);
   const beforeLineSection = lineSection.getBoundingClientRect().top > window.innerHeight - 80;
   const shouldShow = passedRevealPoint && beforeLineSection;
   mobileLine.classList.toggle("is-visible", shouldShow);
@@ -54,5 +55,21 @@ function updateMobileLineVisibility() {
 window.addEventListener("scroll", updateMobileLineVisibility, { passive: true });
 window.addEventListener("resize", updateMobileLineVisibility);
 updateMobileLineVisibility();
+
+if ("IntersectionObserver" in window) {
+  const observedSections = new WeakSet();
+  const funnelObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting || observedSections.has(entry.target) || typeof window.fbq !== "function") return;
+      observedSections.add(entry.target);
+      if (entry.target.id === "about") {
+        window.fbq("trackCustom", "ProfileViewed", { persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+      } else {
+        window.fbq("trackCustom", "LineSectionView", { line_target: entry.target.dataset.lineSection || "unknown", persona_code: window.ACTIVE_PERSONA_CODE || "yuanxuan" });
+      }
+    });
+  }, { threshold: .35 });
+  document.querySelectorAll("#about, [data-line-section]").forEach((section) => funnelObserver.observe(section));
+}
 
 document.getElementById("year").textContent = new Date().getFullYear();

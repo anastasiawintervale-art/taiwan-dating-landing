@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=4">
+  <link rel="stylesheet" href="./styles.css?v=5">
 </head>
 <body>
   <header class="site-header">
@@ -28,9 +28,9 @@
 
       <nav class="site-nav" id="site-nav" aria-label="主要選單">
         <a href="#about">關於我</a>
-        <a href="#story">我的故事</a>
         <a href="#life">生活日常</a>
-        <a href="#line" class="nav-line">看完再聊聊</a>
+        <a href="#story">我的故事</a>
+        <a href="#line-quick" class="nav-line">看完再聊聊</a>
       </nav>
     </div>
   </header>
@@ -40,11 +40,11 @@
       <div class="hero-grid">
         <article class="hero-copy">
           <div class="article-meta"><span data-cms="hero.category">關於感情</span><i></i><time datetime="2026-06-18" data-cms="hero.date">2026.06.18</time></div>
-          <h1 data-cms="hero.title">工作與生活逐漸穩定後，才發現有些日常，還是想和一個人分享。</h1>
+          <h1>嗨，我是 <span data-cms="persona.name">元軒</span></h1>
+          <div class="hero-profile-line"><strong data-cms="persona.age">42 歲</strong><i></i><strong data-cms="persona.location">台北</strong><i></i><span data-cms="persona.status">單身・期待認真認識</span></div>
           <p class="hero-intro" data-cms="hero.intro">42 歲，住在台北。如果妳也期待一段真誠的認識，很高興妳來到這裡。</p>
           <div class="hero-actions">
-            <a class="button button-dark" href="#about">先認識我</a>
-            <a class="button button-line" href="#story">繼續看我的故事</a>
+            <a class="button button-dark" href="#about">30 秒認識我 <span>↓</span></a>
           </div>
           <p class="read-note" data-cms="hero.note">一篇關於生活、陪伴，以及期待的自我介紹</p>
         </article>
@@ -81,21 +81,19 @@
       </div>
     </section>
 
-    <section class="story section" id="story">
-      <div class="story-layout">
-        <aside class="story-side">
-          <p class="eyebrow">My story</p>
-          <h2>關於我的故事</h2>
-          <p class="story-quote" data-cms="story.quote">「生活什麼都不缺時，才更明白陪伴有多難得。」</p>
-        </aside>
-
-        <article class="story-body">
-          <p class="lead" data-cms="story.lead">42 歲的處女座大叔，對生活與未來，從不妥協。</p>
-          <p data-cms="story.p1">在台北松山生活的這些年，我慢慢把工作和生活整理成喜歡的樣子。有自己的節奏，也仍然對每一段真誠的關係保有期待。</p>
-          <p data-cms="story.p2">每天收工回到家，看著安靜的客廳，會發現再充實的生活，如果沒有人一起分享、一起規劃未來，心裡終究少了一個位置。</p>
-          <blockquote data-cms="story.highlight">我不想玩猜心的遊戲，只想認識一個真誠、有質感，也願意好好聊天的人。</blockquote>
-          <p data-cms="story.p3">如果妳今晚也剛好是一個人，願意從日常的小事聊起，甚至聊聊對未來的想法，也許我們可以先認識彼此。</p>
-        </article>
+    <section class="quick-line section" id="line-quick" data-line-section="quick">
+      <div class="quick-line-card">
+        <div class="quick-line-copy">
+          <p class="eyebrow">基本資料看完了</p>
+          <h2 data-cms="cta.title">如果妳覺得我們可能聊得來，歡迎來打聲招呼。</h2>
+          <p data-cms="cta.body">加完後傳一個貼圖給我就好。沒有制式開場，也不用有壓力，讓我們先從一句嗨開始。</p>
+        </div>
+        <div class="quick-line-action">
+          <a class="button button-line button-large" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link data-line-location="quick">
+            <span data-cms="cta.button">傳個貼圖給元軒</span> <span>↗</span>
+          </a>
+          <small>私人 LINE・真誠交友・不打擾</small>
+        </div>
       </div>
     </section>
 
@@ -121,6 +119,30 @@
       </div>
     </section>
 
+    <section class="story section story-compact" id="story">
+      <div class="story-layout story-layout-compact">
+        <aside class="story-side">
+          <p class="eyebrow">My story</p>
+          <h2>想再多了解我</h2>
+          <p class="story-quote" data-cms="story.quote">「生活什麼都不缺時，才更明白陪伴有多難得。」</p>
+        </aside>
+
+        <div class="story-preview">
+          <p class="story-lead" data-cms="story.lead">42 歲的處女座大叔，對生活與未來，從不妥協。</p>
+          <details class="story-details">
+            <summary><span>展開我的完整故事</span><b aria-hidden="true">＋</b></summary>
+            <article class="story-body">
+              <p class="story-thought" data-cms="hero.title">工作與生活逐漸穩定後，才發現有些日常，還是想和一個人分享。</p>
+              <p data-cms="story.p1">在台北松山生活的這些年，我慢慢把工作和生活整理成喜歡的樣子。有自己的節奏，也仍然對每一段真誠的關係保有期待。</p>
+              <p data-cms="story.p2">每天收工回到家，看著安靜的客廳，會發現再充實的生活，如果沒有人一起分享、一起規劃未來，心裡終究少了一個位置。</p>
+              <blockquote data-cms="story.highlight">我不想玩猜心的遊戲，只想認識一個真誠、有質感，也願意好好聊天的人。</blockquote>
+              <p data-cms="story.p3">如果妳今晚也剛好是一個人，願意從日常的小事聊起，甚至聊聊對未來的想法，也許我們可以先認識彼此。</p>
+            </article>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="conversation section">
       <div class="conversation-box">
         <div>
@@ -131,13 +153,13 @@
       </div>
     </section>
 
-    <section class="line-cta" id="line">
+    <section class="line-cta" id="line" data-line-section="footer">
       <div class="line-card">
         <div class="line-mark" aria-hidden="true">LINE</div>
         <p class="eyebrow">Nice to meet you</p>
         <h2 data-cms="cta.title">如果妳覺得我們可能聊得來，歡迎來打聲招呼。</h2>
         <p data-cms="cta.body">加完後傳一個貼圖給我就好。沒有制式開場，也不用有壓力，讓我們先從一句嗨開始。</p>
-        <a class="button button-line button-large" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link>
+        <a class="button button-line button-large" href="https://line.me/R/ti/p/YOUR_LINE_ID_HERE" target="_blank" rel="noopener noreferrer" data-line-link data-line-location="footer">
           <span data-cms="cta.button">傳個貼圖給元軒</span> <span>↗</span>
         </a>
         <small>私人 LINE・真誠交友・不打擾</small>
@@ -158,6 +180,6 @@
   <script src="./config.js?v=2"></script>
   <script src="./content-default.js?v=4"></script>
   <script src="./cms.js?v=8"></script>
-  <script src="./script.js?v=7"></script>
+  <script src="./script.js?v=8"></script>
 </body>
 </html>
