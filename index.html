@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=5">
+  <link rel="stylesheet" href="./styles.css?v=6">
 </head>
 <body>
   <header class="site-header">
@@ -43,7 +43,13 @@
           <h1>嗨，我是 <span data-cms="persona.name">元軒</span></h1>
           <div class="hero-profile-line"><strong data-cms="persona.age">42 歲</strong><i></i><strong data-cms="persona.location">台北</strong><i></i><span data-cms="persona.status">單身・期待認真認識</span></div>
           <p class="hero-intro" data-cms="hero.intro">42 歲，住在台北。如果妳也期待一段真誠的認識，很高興妳來到這裡。</p>
+          <div class="hero-proof" aria-label="快速了解元軒">
+            <span>生活穩定</span>
+            <span>慢熱真誠</span>
+            <span>先看資料再加 LINE</span>
+          </div>
           <div class="hero-actions">
+            <a class="button button-ghost" href="#life">看生活照片</a>
             <a class="button button-dark" href="#about">30 秒認識我 <span>↓</span></a>
           </div>
           <p class="read-note" data-cms="hero.note">一篇關於生活、陪伴，以及期待的自我介紹</p>
@@ -75,6 +81,20 @@
           <div><dt>身高</dt><dd data-cms="persona.height">180 cm</dd></div>
           <div><dt>目前狀態</dt><dd data-cms="persona.status">單身・期待認真認識</dd></div>
         </dl>
+        <div class="intent-grid" aria-label="相處期待">
+          <div>
+            <strong>我比較在意</strong>
+            <p>聊天自然、說話真誠，彼此都不用演得很完美。</p>
+          </div>
+          <div>
+            <strong>適合的開始</strong>
+            <p>從日常、照片、週末去哪裡聊起，慢慢看感覺。</p>
+          </div>
+          <div>
+            <strong>不太適合</strong>
+            <p>只想玩曖昧、沒打算認真認識，可能就不太合適。</p>
+          </div>
+        </div>
         <div class="tags" aria-label="個人特質" data-cms-traits>
           <span>成熟穩重</span><span>重視細節</span><span>溫柔體貼</span><span>喜歡運動</span><span>熱愛生活</span>
         </div>
@@ -94,6 +114,12 @@
           </a>
           <small>私人 LINE・真誠交友・不打擾</small>
         </div>
+        <div class="opener-row" aria-label="可以怎麼開場">
+          <span>可以直接傳：</span>
+          <b>嗨，我看完你的資料了</b>
+          <b>照片裡是哪裡？</b>
+          <b>週末喜歡去哪走走？</b>
+        </div>
       </div>
     </section>
 
@@ -103,7 +129,7 @@
         <p>工作之外，我也喜歡把日子過得舒服一點。</p>
       </div>
 
-      <div class="journal-grid">
+      <div class="journal-grid journal-grid-expanded">
         <figure class="journal-card card-tall">
           <img src="./lifestyle-coffee.jpg" alt="元軒週末在咖啡店休息" data-cms-img="images.life1" loading="lazy" decoding="async">
           <figcaption><time>週末午後</time><strong>找間舒服的小店，讓生活慢一點。</strong></figcaption>
@@ -115,6 +141,18 @@
         <figure class="journal-card">
           <img src="./lifestyle-dinner.jpg" alt="元軒穿西裝的鏡前自拍" data-cms-img="images.life3" loading="lazy" decoding="async">
           <figcaption><time>工作日</time><strong>認真工作，也認真照顧自己的生活。</strong></figcaption>
+        </figure>
+        <figure class="journal-card">
+          <img src="./hero-portrait.jpg" alt="元軒的生活照片四" data-cms-img="images.life4" loading="lazy" decoding="async">
+          <figcaption><time>日常側拍</time><strong>不一定要特別安排，真實一點更自在。</strong></figcaption>
+        </figure>
+        <figure class="journal-card">
+          <img src="./lifestyle-coffee.jpg" alt="元軒的生活照片五" data-cms-img="images.life5" loading="lazy" decoding="async">
+          <figcaption><time>放鬆時刻</time><strong>喜歡安靜、有質感，也不用太吵的地方。</strong></figcaption>
+        </figure>
+        <figure class="journal-card">
+          <img src="./lifestyle-outdoor.jpg" alt="元軒的生活照片六" data-cms-img="images.life6" loading="lazy" decoding="async">
+          <figcaption><time>戶外走走</time><strong>有時候散步，比正式約會更容易聊起來。</strong></figcaption>
         </figure>
       </div>
     </section>
@@ -178,7 +216,7 @@
   </button>
 
   <script src="./config.js?v=2"></script>
-  <script src="./content-default.js?v=4"></script>
+  <script src="./content-default.js?v=5"></script>
   <script src="./cms.js?v=8"></script>
   <script src="./script.js?v=8"></script>
 </body>
